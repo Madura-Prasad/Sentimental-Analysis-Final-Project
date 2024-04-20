@@ -13,20 +13,21 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 
-<title>Digian</title>
+<title>MAS Technology Services</title>
 
 
 <!-- bootstrap core css -->
 <link rel="stylesheet" type="text/css"
-	th:href="@{assets/user/css/bootstrap.css}" />
+	th:href="@{../assets/user/css/bootstrap.css}" />
 
 <!-- font awesome style -->
-<link th:href="@{assets/user/css/font-awesome.min.css}" rel="stylesheet" />
+<link th:href="@{../assets/user/css/font-awesome.min.css}"
+	rel="stylesheet" />
 
 <!-- Custom styles for this template -->
-<link th:href="@{assets/user/css/style.css}" rel="stylesheet" />
+<link th:href="@{../assets/user/css/style.css}" rel="stylesheet" />
 <!-- responsive style -->
-<link th:href="@{assets/user/css/responsive.css}" rel="stylesheet" />
+<link th:href="@{../assets/user/css/responsive.css}" rel="stylesheet" />
 
 </head>
 
@@ -60,18 +61,23 @@
 							<li class="nav-item"><a class="nav-link"
 								th:href="@{'/contact'}">Contact Us</a></li>
 						</ul>
-						<th:block th:if="${user==NULL}">
+						<th:block th:if="${users==NULL}">
+							<script>
+								console.log('${user.name}');
+							</script>
+
 							<div class="quote_btn-container">
 								<a th:href="@{'/signin'}" class="quote_btn"> Login </a>
 							</div>
 						</th:block>
-						<th:block th:if="${user!=null}">
+						<th:block th:if="${users!=null}">
 							<a href="">
 								<div class="quote_btn-container">
 									<a href="" class="quote_btn"> Prediction </a>
-									&nbsp;&nbsp;&nbsp; <a th:href="@{'/submit'}" class="quote_btn">Submit
-										Prediction </a> &nbsp;&nbsp;&nbsp; <a href="/logout"
-										class="quote_btn" style="background-color: red;"> Logout </a>
+									&nbsp;&nbsp;&nbsp; <a th:href="@{'/user/submit'}"
+										class="quote_btn">Submit Prediction </a> &nbsp;&nbsp;&nbsp; <a
+										href="/logout" class="quote_btn"
+										style="background-color: red;"> Logout </a>
 								</div>
 							</a>
 						</th:block>
@@ -87,128 +93,51 @@
 
 
 	<!-- Recent Sales Start -->
-	<div class="container-fluid pt-4 px-4 d-flex justify-content-center">
-		<div class="text-center rounded p-4 col-sm-12 col-xl-6">
-			<div class="d-flex align-items-center justify-content-between mb-4">
-				<h6 class="mb-0">Recent Submission</h6>
-			</div>
-			<div class="table-responsive">
-				<table
-					class="table text-start align-middle table-bordered table-hover mb-0">
-					<thead>
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Name</th>
-							<th scope="col">Cluster</th>
-							<th scope="col">Date</th>
-							<th scope="col">No. of Feedbacks</th>
-							<th scope="col">No. of positive Feedbacks</th>
-							<th scope="col">No. of Negative Feedbacks</th>
-							
-						</tr>
-					</thead>
-					<tbody id="prodTable">
-
-					</tbody>
-
+	<div class="container-fluid pt-4 px-4 ">
+    <div class="d-flex justify-content-between align-items-center mb-4 col-sm-12 col-xl-12">
+        <h6 class="mb-0" style="background-color: black; padding: 15px; color:white; border-radius:10px;">Recent Submission</h6>
+        <a th:href="@{'/user/addSubmit'}" class="btn btn btn-primary btn-rounded"><i class="fa fa-plus"></i>  Add Submissions</a>
+    </div>
+    <div class="text-center rounded p-4 col-sm-12 col-xl-12">
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Cluster</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">No. of Feedbacks</th>
+                        <th scope="col">No. of Positive Feedbacks</th>
+                        <th scope="col">No. of Negative Feedbacks</th>
+                        <th class="text-right">Action</th>
+                    </tr>
+                </thead>
+					<tbody>
+											<tr th:each="submit: ${submit}">
+												<td th:text="${submit.name}"></td>
+												<td th:text="${submit.cluster}"></td>
+												<td th:text="${submit.date}"></td>
+												<td th:text="${submit.feedbacks}"></td>
+												<td th:text="${submit.positive_feedback}"></td>
+												<td th:text="${submit.negative_feedback}"></td>
+												<td class="text-right">
+													<a class="mr-3" th:href="@{/user/editSubmit/{id}(id=${submit.id})}"><i
+															class="fa fa-pencil" ></i> </a>
+													<a th:href="@{/user/deleteSubmit/{id}(id=${submit.id})}"><i
+															class="fa fa-trash-o" ></i></a>
+												</td>
+											</tr>
+										</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
 	<!-- Recent Sales End -->
 
-	<!-- Form Start -->
-	<div class="container-fluid pt-4 px-4 d-flex justify-content-center">
-		<div class="row g-4 ">
-			<div class="">
-				<div class="rounded h-100 p-4 ">
-					<h6 class="mb-8">Add Prediction</h6>
-					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-6 col-form-label">ID</label>
-						<div class="col-sm-10">
-							<input disabled type="text" class="form-control" id="input1">
-						</div>
-					</div>
-					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-6 col-form-label" >Name</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="input7"
-								th:value="${user.name}" readonly>
-
-						</div>
-					</div>
-					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-6 col-form-label">Select the "Cluster"</label>
-						<div class="col-sm-10">
-							<select class="form-control">
-								<option value="ACTIVE">ACTIVE</option>
-								<option value="CORPORATE">CORPORATE</option>
-								<option value="INTIMATES MANUFACTURING 01">INTIMATES MANUFACTURING 01</option>
-								<option value="INTIMATES MANUFACTURING 02">INTIMATES MANUFACTURING 02</option>
-								<option value="INTIMATES TRADING">INTIMATES TRADING</option>
-								<option value="JOINT VENTURES">JOINT VENTURES</option>
-								<option value="KREEDA">KREEDA</option>
-								<option value="OVERSEAS & BODYLINE">OVERSEAS & BODYLINE</option>
-							</select>
-						</div>
-					</div>
-					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-6 col-form-label">Date</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="datetimeInput"
-								readonly>
-							<script>
-								/*<![CDATA[*/
-								// Function to update the input field with current date and time
-								function updateDateTime() {
-									var datetimeInput = document
-											.getElementById('datetimeInput');
-									var now = new Date();
-									var formattedDateTime = now.toISOString()
-											.slice(0, 19).replace('T', ' ');
-									datetimeInput.value = formattedDateTime;
-								}
-
-								updateDateTime();
-								setInterval(updateDateTime, 1000);
-							</script>
-
-						</div>
-					</div>
-					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-6 col-form-label">No.
-							of Feedbacks</label>
-						<div class="col-sm-10">
-							<input type="number" class="form-control" id="input4" required>
-						</div>
-					</div>
-					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-6 col-form-label">No.
-							of positive Feedbacks </label>
-						<div class="col-sm-10">
-							<input type="number" class="form-control" id="input5" required>
-						</div>
-					</div>
-					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-6 col-form-label">No.
-							of Negative Feedbacks</label>
-						<div class="col-sm-10">
-							<input type="number" class="form-control" id="input6" required>
-						</div>
-					</div>
-					
-
-					<button type="submit" class="btn btn-success fw-bold">Submit</button>
-					<button type="reset" class="btn btn-secondary fw-bold">Update</button>
-					<button type="reset" class="btn btn-danger fw-bold ">Delete</button>
-				</div>
-			</div>
-		</div>
-
-	</div>
+	
 	<!-- Content
   <!-- jQery -->
-	<script th:src="@{assets/user/js/jquery-3.4.1.min.js}"></script>
+	<script th:src="@{../assets/user/js/jquery-3.4.1.min.js}"></script>
 	<!-- popper js -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -217,7 +146,7 @@
 		
 	</script>
 	<!-- bootstrap js -->
-	<script th:src="@{assets/user/js/bootstrap.js}"></script>
+	<script th:src="@{../assets/user/js/bootstrap.js}"></script>
 	<script src="js/custom.js"></script>
 	<!-- Google Map -->
 	<script
