@@ -84,6 +84,20 @@ public class FrontPageController {
 		return "contact";
 	}
 	
+	@GetMapping("/submit")
+	public String Submit(Model model, Principal principal) {
+		boolean isLoggedIn = principal != null;
+
+		model.addAttribute("isLoggedIn", isLoggedIn);
+
+		if (isLoggedIn) {
+			String email = principal.getName();
+			User user = userRepo.findByEmail(email);
+			model.addAttribute("user", user);
+		}
+		return "submit";
+	}
+	
 	
 	
 	@GetMapping("/signin")
