@@ -82,14 +82,15 @@
 		<!-- end header section -->
 	</div>
 
-	<!-- about section -->
+
+
+
 
 	<!-- Recent Sales Start -->
-	<div class="container-fluid pt-4 px-4">
-		<div class="bg-secondary text-center rounded p-4">
+	<div class="container-fluid pt-4 px-4 d-flex justify-content-center">
+		<div class="text-center rounded p-4 col-sm-12 col-xl-6">
 			<div class="d-flex align-items-center justify-content-between mb-4">
 				<h6 class="mb-0">Recent Submission</h6>
-				<a href="">Show All</a>
 			</div>
 			<div class="table-responsive">
 				<table
@@ -97,12 +98,13 @@
 					<thead>
 						<tr>
 							<th scope="col">#</th>
+							<th scope="col">Name</th>
 							<th scope="col">Cluster</th>
 							<th scope="col">Date</th>
 							<th scope="col">No. of Feedbacks</th>
 							<th scope="col">No. of positive Feedbacks</th>
 							<th scope="col">No. of Negative Feedbacks</th>
-							<th scope="col">Name</th>
+							
 						</tr>
 					</thead>
 					<tbody id="prodTable">
@@ -116,33 +118,45 @@
 	<!-- Recent Sales End -->
 
 	<!-- Form Start -->
-	<div class="container-fluid pt-4 px-4">
-		<div class="row g-4">
-			<div class="col-sm-12 col-xl-8">
-				<div class="bg-secondary rounded h-100 p-4">
-					<h6 class="mb-4">Add Prediction</h6>
+	<div class="container-fluid pt-4 px-4 d-flex justify-content-center">
+		<div class="row g-4 ">
+			<div class="">
+				<div class="rounded h-100 p-4 ">
+					<h6 class="mb-8">Add Prediction</h6>
 					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">ID</label>
+						<label for="inputEmail3" class="col-sm-6 col-form-label">ID</label>
 						<div class="col-sm-10">
 							<input disabled type="text" class="form-control" id="input1">
 						</div>
 					</div>
 					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">Select the "Cluster"</label>
+						<label for="inputEmail3" class="col-sm-6 col-form-label" >Name</label>
 						<div class="col-sm-10">
-							<select class="form-control">
-								<option value="cluster" selected>Cluster</option>
-								<option value="other">Other Option</option>
-								<!-- Add more options here if needed -->
-							</select>
+							<input type="text" class="form-control" id="input7"
+								th:value="${user.name}" readonly>
 
 						</div>
 					</div>
 					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">Date</label>
+						<label for="inputEmail3" class="col-sm-6 col-form-label">Select the "Cluster"</label>
+						<div class="col-sm-10">
+							<select class="form-control">
+								<option value="ACTIVE">ACTIVE</option>
+								<option value="CORPORATE">CORPORATE</option>
+								<option value="INTIMATES MANUFACTURING 01">INTIMATES MANUFACTURING 01</option>
+								<option value="INTIMATES MANUFACTURING 02">INTIMATES MANUFACTURING 02</option>
+								<option value="INTIMATES TRADING">INTIMATES TRADING</option>
+								<option value="JOINT VENTURES">JOINT VENTURES</option>
+								<option value="KREEDA">KREEDA</option>
+								<option value="OVERSEAS & BODYLINE">OVERSEAS & BODYLINE</option>
+							</select>
+						</div>
+					</div>
+					<div class="row mb-3">
+						<label for="inputEmail3" class="col-sm-6 col-form-label">Date</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="datetimeInput"
-								required>
+								readonly>
 							<script>
 								/*<![CDATA[*/
 								// Function to update the input field with current date and time
@@ -162,46 +176,34 @@
 						</div>
 					</div>
 					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">No.
+						<label for="inputEmail3" class="col-sm-6 col-form-label">No.
 							of Feedbacks</label>
 						<div class="col-sm-10">
 							<input type="number" class="form-control" id="input4" required>
 						</div>
 					</div>
 					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">No.
+						<label for="inputEmail3" class="col-sm-6 col-form-label">No.
 							of positive Feedbacks </label>
 						<div class="col-sm-10">
 							<input type="number" class="form-control" id="input5" required>
 						</div>
 					</div>
 					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">No.
+						<label for="inputEmail3" class="col-sm-6 col-form-label">No.
 							of Negative Feedbacks</label>
 						<div class="col-sm-10">
 							<input type="number" class="form-control" id="input6" required>
 						</div>
 					</div>
-					<div class="row mb-3">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="input7"
-								th:value="${user.name}" required>
-
-						</div>
-					</div>
+					
 
 					<button type="submit" class="btn btn-success fw-bold">Submit</button>
 					<button type="reset" class="btn btn-secondary fw-bold">Update</button>
 					<button type="reset" class="btn btn-danger fw-bold ">Delete</button>
-					<button type="reset" class="btn btn-warning fw-bold text-dark">Reset</button>
 				</div>
 			</div>
 		</div>
-
-		<!-- Form End -->
-
-
 
 	</div>
 	<!-- Content
