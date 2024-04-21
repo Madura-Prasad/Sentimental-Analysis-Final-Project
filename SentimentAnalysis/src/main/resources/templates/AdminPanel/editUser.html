@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<!-- Basic -->
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!-- Mobile Metas -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<!-- Site Metas -->
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<title>MAS Technology Services</title>
+
+
+<!-- bootstrap core css -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{../../assets/user/css/bootstrap.css}" />
+
+<!-- font awesome style -->
+<link th:href="@{../../assets/user/css/font-awesome.min.css}"
+	rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<link th:href="@{../../assets/user/css/style.css}" rel="stylesheet" />
+<!-- responsive style -->
+<link th:href="@{../../assets/user/css/responsive.css}" rel="stylesheet" />
+
+</head>
+
+<body class="sub_page">
+
+
+	<!-- Form Start -->
+	<div class="container-fluid pt-4 px-4 d-flex justify-content-center">
+		<div class="row g-4 ">
+			<form th:action="@{/admin/editUser/{id}(id=${user.id})}" th:object="${user}" method="post">
+				<div class="rounded h-100 p-4 ">
+					<h2 class="mb-8">Edit User</h6>
+					<br><br>
+					<div class="row mb-3">
+						<label for="inputEmail3" class="col-sm-6 col-form-label">Name</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="name" th:field="*{name}" name="name" required>
+
+						</div>
+					</div>
+					
+					
+					<div class="row mb-3">
+						<label for="inputEmail3" class="col-sm-6 col-form-label">Email Address</label>
+						<div class="col-sm-10">
+							<input type="email" class="form-control" id="feedbacks" name="email"  th:field="*{email}" required>
+						</div>
+					</div>
+					<div class="row mb-3">
+						<label for="inputEmail3" class="col-sm-6 col-form-label">Mobile Number </label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" id="positive_feedback" name="mobile"  th:field="*{mobile}" required>
+						</div>
+					</div>
+					<div class="row mb-3">
+						<label for="inputEmail3" class="col-sm-6 col-form-label">Password</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="negative_feedback" name="password"  th:field="*{password}" required>
+						</div>
+					</div>
+
+
+					<button type="submit" class="btn btn-success fw-bold">Submit</button>
+
+				</div>
+				</form>
+			
+		</div>
+
+	</div>
+	<!-- Content
+  <!-- jQery -->
+	
+
+</body>
+
+</html>
